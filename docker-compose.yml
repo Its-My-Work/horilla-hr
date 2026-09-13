@@ -8,6 +8,7 @@
 services:
   web:
     build: .
+    restart: unless-stopped
     ports:
       - "8000:8000"
     volumes:
@@ -37,6 +38,7 @@ services:
 
   db:
     image: postgres:16-alpine
+    restart: unless-stopped
     environment:
       POSTGRES_DB: horilla_db
       POSTGRES_USER: horilla_user
@@ -51,6 +53,7 @@ services:
 
   redis:
     image: redis:7-alpine
+    restart: unless-stopped
     command: redis-server --appendonly yes --requirepass horilla_pass
     volumes:
       - redis_data:/data
